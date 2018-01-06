@@ -12,7 +12,7 @@
             <div class="col-md-6 col-md-offset-3">
 
                     <!-- Form - Blog Comment -->
-                @helper.form(action = CSRF(routes.CommentController.createComment(postId)), 'class -> "form-horizontal") {
+                @helper.form(action = CSRF(routes.AnswerController.createComment(postId)), 'class -> "form-horizontal") {
 
                     <div class="form-group">
                         <div class="col-sm-9">

@@ -17,7 +17,7 @@ import views.html.post;
 import javax.inject.Inject;
 import java.util.Optional;
 
-public class PostController extends Controller {
+public class QuestionController extends Controller {
 
     private final PostService postService;
     private final CommentService commentService;
@@ -25,7 +25,7 @@ public class PostController extends Controller {
     private final Form<LoginDTO> loginDTOForm;
 
     @Inject
-    public PostController(PostService postService, CommentService commentService, FormFactory formFactory) {
+    public QuestionController(PostService postService, CommentService commentService, FormFactory formFactory) {
         this.postService = postService;
         this.commentService = commentService;
         this.postForm = formFactory.form(PostDTO.class);
@@ -66,7 +66,7 @@ public class PostController extends Controller {
             PostDTO postDTO = postForm.get();
             postDTO.username = session("username");
             postDTO = postService.savePost(postDTO);
-            return redirect(routes.PostController.getPost(postDTO.id));
+            return redirect(routes.QuestionController.getPost(postDTO.id));
         }
     }
 
@@ -83,7 +83,7 @@ public class PostController extends Controller {
             PostDTO postDTO = postForm.get();
             postDTO.id = postId;
             return postService.editPost(postDTO)
-                    .map(x -> redirect(routes.PostController.getPost(postId)))
+                    .map(x -> redirect(routes.QuestionController.getPost(postId)))
                     .orElseGet(Results::notFound);
         }
     }
@@ -95,7 +95,7 @@ public class PostController extends Controller {
         if (optionalPost.isPresent() && !optionalPost.get().username.equals(session("username")))
             return badRequest(views.html.login.render(loginDTOForm.withGlobalError("Please login with proper credentials to modify this post")));
         postService.delete(postId);
-        return redirect(routes.BlogController.usersBlog(session("username"), 1));
+        return redirect(routes.UserPostController.usersBlog(session("username"), 1));
     }
 
 }

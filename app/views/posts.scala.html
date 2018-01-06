@@ -10,8 +10,8 @@
     @for(postDTO <- postsPager.getList) {
         <div class="panel">
             <div class="panel-heading">
-                <h1><a href="@routes.PostController.getPost(postDTO.id)">@postDTO.title</a></h1>
-                <div> Created @postDTO.createDate by <a href="@routes.BlogController.usersBlog(postDTO.username)">@postDTO.username</a>
+                <h1><a href="@routes.QuestionController.getPost(postDTO.id)">@postDTO.title</a></h1>
+                <div> Created @postDTO.createDate by <a href="@routes.UserPostController.usersBlog(postDTO.username)">@postDTO.username</a>
                 </div>
             </div>
             <h3 class="panel-body"> @postDTO.body</h3>

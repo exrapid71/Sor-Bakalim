@@ -13,7 +13,7 @@ public class NotAuthenticatedAction extends Action<NotAuthenticated> {
     public CompletionStage<Result> call(final Http.Context ctx) {
         String username = ctx.session().get("username");
         if (username != null) {
-            Result login = redirect(controllers.routes.BlogController.usersBlog(username, 1));
+            Result login = redirect(controllers.routes.UserPostController.usersBlog(username, 1));
             return CompletableFuture.completedFuture(login);
         } else {
             return delegate.call(ctx);

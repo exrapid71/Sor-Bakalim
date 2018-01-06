@@ -39,7 +39,7 @@ public class UserController extends Controller {
             return userService.authenticateUser(loginDTOForm.get())
                     .map(loginDTO -> {
                         session("username", loginDTO.username);
-                        return redirect(routes.BlogController.blog(1));
+                        return redirect(routes.UserPostController.blog(1));
                     })
                     .orElse(badRequest(login.render(loginDTOForm.withGlobalError(
                             "Your username and password didn't match. Please try again."))));
@@ -49,7 +49,7 @@ public class UserController extends Controller {
     @Authenticated
     public Result logout() {
         session().clear();
-        return redirect(routes.BlogController.blog(1));
+        return redirect(routes.UserPostController.blog(1));
     }
 
     @NotAuthenticated

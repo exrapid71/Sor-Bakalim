@@ -10,14 +10,14 @@ import views.html.usersBlog;
 
 import javax.inject.Inject;
 
-public class BlogController extends Controller {
+public class UserPostController extends Controller {
 
     private static final int N_OF_LATEST_POSTS = 5;
     private final PostService postService;
     private final UserService userService;
 
     @Inject
-    public BlogController(PostService postService, UserService userService) {
+    public UserPostController(PostService postService, UserService userService) {
         this.postService = postService;
         this.userService = userService;
     }

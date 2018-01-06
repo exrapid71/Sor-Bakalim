@@ -3,15 +3,15 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET         /                            controllers.BlogController.blog(page: Int ?= 1)
+GET         /                            controllers.UserPostController.blog(page: Int ?= 1)
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file                controllers.Assets.at(path="/public", file)
 
 # Home page of the application, showing blog posts from all users in reversed order of the date of publication
-GET         /blog                        controllers.BlogController.blog(page: Int ?= 1)
+GET         /blog                        controllers.UserPostController.blog(page: Int ?= 1)
 # Blog page of user :username, showing blog posts from this users in reversed order of the date of publication
-GET         /blog/:username              controllers.BlogController.usersBlog(username, page: Int ?= 1)
+GET         /blog/:username              controllers.UserPostController.usersBlog(username, page: Int ?= 1)
 
 # Present "login" page
 GET         /login                       controllers.UserController.getLoginForm
@@ -25,19 +25,19 @@ GET         /register                    controllers.UserController.getRegistrat
 POST        /register                    controllers.UserController.register
 
 # Present "create a post" page
-GET         /post/new                    controllers.PostController.getNewPostForm
+GET         /post/new                    controllers.QuestionController.getNewPostForm
 # Blog post page for id of :id
-GET         /post/:id                    controllers.PostController.getPost(id: Long)
+GET         /post/:id                    controllers.QuestionController.getPost(id: Long)
 # Present "edit a post" page
-GET         /post/:id/edit               controllers.PostController.getEditPostForm(id: Long)
+GET         /post/:id/edit               controllers.QuestionController.getEditPostForm(id: Long)
 # Create new post
-POST        /post                        controllers.PostController.createPost
+POST        /post                        controllers.QuestionController.createPost
 # Update post with id of :id
-POST        /post/:id/edit               controllers.PostController.editPost(id: Long)
+POST        /post/:id/edit               controllers.QuestionController.editPost(id: Long)
 # Deletes post with id of :id
-GET         /post/:id/delete             controllers.PostController.deletePost(id: Long)
+GET         /post/:id/delete             controllers.QuestionController.deletePost(id: Long)
 
 # Present "leave a comment" page
-GET         /post/:postId/comment        controllers.CommentController.getCommentForm(postId: Long)
+GET         /post/:postId/comment        controllers.AnswerController.getCommentForm(postId: Long)
 # Create new comment
-POST        /post/:postId/comment        controllers.CommentController.createComment(postId: Long)
+POST        /post/:postId/comment        controllers.AnswerController.createComment(postId: Long)

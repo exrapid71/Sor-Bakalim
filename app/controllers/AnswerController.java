@@ -11,13 +11,13 @@ import views.html.comment;
 
 import javax.inject.Inject;
 
-public class CommentController extends Controller {
+public class AnswerController extends Controller {
 
     private final CommentService commentService;
     private final Form<CommentDTO> commentForm;
 
     @Inject
-    public CommentController(CommentService commentService, FormFactory formFactory) {
+    public AnswerController(CommentService commentService, FormFactory formFactory) {
         this.commentService = commentService;
         this.commentForm = formFactory.form(CommentDTO.class);
     }
@@ -39,7 +39,7 @@ public class CommentController extends Controller {
             commentDTO.username = session("username");
             commentDTO.postId = postId;
             commentService.saveComment(commentDTO);
-            return redirect(routes.PostController.getPost(postId));
+            return redirect(routes.QuestionController.getPost(postId));
         }
     }
 }
