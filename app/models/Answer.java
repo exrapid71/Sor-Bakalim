@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class Comment extends Model {
+public class Answer extends Model {
 
     @Id
     public Long id;
@@ -31,9 +31,9 @@ public class Comment extends Model {
     @ManyToOne
     public User user;
 
-    public static final Finder<Long, Comment> find = new Finder<>(Comment.class);
+    public static final Finder<Long, Answer> find = new Finder<>(Answer.class);
 
-    public Comment(String body, Post post, User user) {
+    public Answer(String body, Post post, User user) {
         this.body = body;
         this.post = post;
         this.user = user;

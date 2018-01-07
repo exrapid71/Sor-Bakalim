@@ -2,10 +2,9 @@
 * This template takes a single argument, a list of Posts to display.
 *@
 @import java.util.List
-@import dto.{CommentDTO, PostDTO}
+@import dto.{AnswerDTO, PostDTO}
 
-@(postDTO: PostDTO, commentDTOs: List[CommentDTO])
-
+@(postDTO: PostDTO, answerDTOs: List[AnswerDTO])
 @main {
     <!-- Post -->
     <div class="jumbotron">
@@ -39,18 +38,18 @@
 
     </div>
 
-    <h2>Comments:</h2>
+    <h2>Answers:</h2>
 
-        <!-- Comments -->
-    @for(commentDTO <- commentDTOs) {
+        <!-- Answers -->
+    @for(answerDTO <- answerDTOs) {
         <div class="well">
 
-            <div> Created @commentDTO.createDate by
-                <a href="@routes.UserPostController.usersBlog(commentDTO.username)">@commentDTO.username</a>
+            <div> Created @postDTO.createDate by
+                <a href="@routes.UserPostController.usersBlog(answerDTO.username)">@answerDTO.username</a>
             </div>
 
-                <!-- Comment body -->
-            <h3>@commentDTO.body</h3>
+                <!-- Answer body -->
+            <h3>@answerDTO.body</h3>
 
         </div>
     }
@@ -58,9 +57,9 @@
         <!-- Show Comment button only if User is authenticated -->
     @if(session.get("username") != null) {
 
-        <!-- Comment button -->
-    <a href="@routes.AnswerController.getCommentForm(postDTO.id)" class="col-md-2 pull-right">
-        <button type="button" class="btn btn-primary btn-block">Comment</button>
+        <!-- Answer button -->
+    <a href="@routes.AnswerController.getAnswerForm(postDTO.id)" class="col-md-2 pull-right">
+        <button type="button" class="btn btn-primary btn-block">Answer</button>
     </a>
 }
 }

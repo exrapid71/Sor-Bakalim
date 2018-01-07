@@ -8,7 +8,7 @@ import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Results;
-import services.CommentService;
+import services.AnswerService;
 import services.PostService;
 import views.html.editPost;
 import views.html.newPost;
@@ -20,23 +20,23 @@ import java.util.Optional;
 public class QuestionController extends Controller {
 
     private final PostService postService;
-    private final CommentService commentService;
+    private final AnswerService answerService;
     private final Form<PostDTO> postForm;
     private final Form<LoginDTO> loginDTOForm;
 
     @Inject
-    public QuestionController(PostService postService, CommentService commentService, FormFactory formFactory) {
+    public QuestionController(PostService postService, AnswerService answerService, FormFactory formFactory) {
         this.postService = postService;
-        this.commentService = commentService;
+        this.answerService = answerService;
         this.postForm = formFactory.form(PostDTO.class);
         this.loginDTOForm = formFactory.form(LoginDTO.class);
     }
 
     public Result getPost(Long postId) {
-        return commentService.findCommentsForPost(postId)
-                .map(commentDTOs ->
+        return answerService.findAnswersForPost(postId)
+                .map(answerDTOs ->
                         postService.getPost(postId)
-                                .map(postDTO -> ok(post.render(postDTO, commentDTOs)))
+                                .map(postDTO -> ok(post.render(postDTO, answerDTOs)))
                                 .orElseGet(Results::notFound))
                 .orElseGet(Results::notFound);
     }

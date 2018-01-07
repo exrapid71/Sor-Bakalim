@@ -1,8 +1,8 @@
 import com.google.inject.AbstractModule;
-import services.CommentService;
+import services.AnswerService;
 import services.PostService;
 import services.UserService;
-import services.impl.CommentServiceImpl;
+import services.impl.AnswerServiceImpl;
 import services.impl.PostServiceImpl;
 import services.impl.UserServiceImpl;
 
@@ -20,7 +20,7 @@ public class Module extends AbstractModule {
 
     @Override
     public void configure() {
-        bind(CommentService.class).to(CommentServiceImpl.class);
+        bind(AnswerService.class).to(AnswerServiceImpl.class);
         bind(PostService.class).to(PostServiceImpl.class);
         bind(UserService.class).to(UserServiceImpl.class);
     }

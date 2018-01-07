@@ -3,13 +3,13 @@
 
 # --- !Ups
 
-create table comment (
+create table answer (
   id                            bigint auto_increment not null,
   body                          TEXT,
   post_id                       bigint,
   user_id                       bigint,
   create_date                   datetime(6) not null,
-  constraint pk_comment primary key (id)
+  constraint pk_answer primary key (id)
 );
 
 create table post (
@@ -47,11 +47,11 @@ create table user_role (
   constraint pk_user_role primary key (user_id,role_id)
 );
 
-alter table comment add constraint fk_comment_post_id foreign key (post_id) references post (id) on delete restrict on update restrict;
-create index ix_comment_post_id on comment (post_id);
+alter table answer add constraint fk_answer_post_id foreign key (post_id) references post (id) on delete restrict on update restrict;
+create index ix_answer_post_id on answer (post_id);
 
-alter table comment add constraint fk_comment_user_id foreign key (user_id) references user (id) on delete restrict on update restrict;
-create index ix_comment_user_id on comment (user_id);
+alter table answer add constraint fk_answer_user_id foreign key (user_id) references user (id) on delete restrict on update restrict;
+create index ix_answer_user_id on answer (user_id);
 
 alter table post add constraint fk_post_user_id foreign key (user_id) references user (id) on delete restrict on update restrict;
 create index ix_post_user_id on post (user_id);
@@ -65,11 +65,11 @@ create index ix_user_role_role on user_role (role_id);
 
 # --- !Downs
 
-alter table comment drop foreign key fk_comment_post_id;
-drop index ix_comment_post_id on comment;
+alter table answer drop foreign key fk_answer_post_id;
+drop index ix_answer_post_id on answer;
 
-alter table comment drop foreign key fk_comment_user_id;
-drop index ix_comment_user_id on comment;
+alter table answer drop foreign key fk_answer_user_id;
+drop index ix_answer_user_id on answer;
 
 alter table post drop foreign key fk_post_user_id;
 drop index ix_post_user_id on post;
@@ -80,7 +80,7 @@ drop index ix_user_role_user on user_role;
 alter table user_role drop foreign key fk_user_role_role;
 drop index ix_user_role_role on user_role;
 
-drop table if exists comment;
+drop table if exists answer;
 
 drop table if exists post;
 

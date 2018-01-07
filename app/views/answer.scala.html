@@ -1,24 +1,24 @@
 @*
 * This template takes a single argument, a list of Posts to display.
 *@
-@import dto.CommentDTO
+@import dto.AnswerDTO
 @import helper.CSRF
 
-@(commentForm: Form[CommentDTO], postId: Long)
+@(answerForm: Form[AnswerDTO], postId: Long)
 
 @main {
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
 
-                    <!-- Form - Blog Comment -->
-                @helper.form(action = CSRF(routes.AnswerController.createComment(postId)), 'class -> "form-horizontal") {
+                    <!-- Form - Blog Answer -->
+                @helper.form(action = CSRF(routes.AnswerController.createAnswer(postId)), 'class -> "form-horizontal") {
 
                     <div class="form-group">
                         <div class="col-sm-9">
 
                                 <!-- Errors - body -->
-                            @for(error <- commentForm("body").errors) {
+                            @for(error <- answerForm("body").errors) {
                                 <p class="alert alert-danger">@error.format(messages())</p>
                             }
 

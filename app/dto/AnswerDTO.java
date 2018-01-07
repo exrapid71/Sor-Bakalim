@@ -4,7 +4,7 @@ import play.data.validation.Constraints.Required;
 
 import java.util.Date;
 
-public class CommentDTO {
+public class AnswerDTO {
 
     @Required(message = "*Please write something")
     public String body;
@@ -15,10 +15,10 @@ public class CommentDTO {
 
     public Date createDate;
 
-    public CommentDTO() {
+    public AnswerDTO() {
     }
 
-    public CommentDTO(String body, String username, Long postId, Date createDate) {
+    public AnswerDTO(String body, String username, Long postId, Date createDate) {
         this.body = body;
         this.username = username;
         this.postId = postId;

@@ -32,7 +32,7 @@ public class Post extends Model {
     public User user;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
-    public List<Comment> comments;
+    public List<Answer> answers;
 
     public static final Finder<Long, Post> find = new Finder<>(Post.class);
 
