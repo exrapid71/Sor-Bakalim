@@ -27,6 +27,8 @@ public class Post extends Model {
     @Column(updatable = false)
     public Date createDate;
 
+
+
     @NotNull
     @ManyToOne
     public User user;

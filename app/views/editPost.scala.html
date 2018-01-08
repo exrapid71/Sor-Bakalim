@@ -1,21 +1,20 @@
 @*
 * This template takes a single argument, a list of Posts to display.
 *@
-@import dto.PostDTO
+@import dto.QuestionDTO
 @import helper.CSRF
 
-@(postForm: Form[PostDTO], postId: Long)
+@(questionForm: Form[QuestionDTO], postId: Long)
 
 @main {
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
-
-                    <!-- Form - Blog Post -->
+                
                 @helper.form(action = CSRF(routes.QuestionController.editPost(postId)), 'class -> "form-horizontal") {
-                    @post_form(postForm)
+                    @post_form(questionForm)
                     <!-- Form field - createDate -->
-                <input type="hidden" name="postId" value="@postForm("createDate").getValue.get()">
+                <input type="hidden" name="postId" value="@questionForm("createDate").getValue.get()">
                 }
 
             </div>

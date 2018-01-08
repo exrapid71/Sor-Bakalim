@@ -2,7 +2,7 @@ package actions;
 
 import annotations.PostExistsAndUserIsOwner;
 import dto.LoginDTO;
-import dto.PostDTO;
+import dto.QuestionDTO;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Action;
@@ -28,7 +28,7 @@ public class PostExistsAndUserIsOwnerAction extends Action<PostExistsAndUserIsOw
 
     public CompletionStage<Result> call(final Http.Context ctx) {
         String username = ctx.session().get("username");
-        Optional<PostDTO> optionalPost = postService.getPost(6L);
+        Optional<QuestionDTO> optionalPost = postService.getPost(6L);
         if (!optionalPost.isPresent()) {
             return CompletableFuture.completedFuture(notFound());
         } else if (!optionalPost.get().username.equals(username)) {

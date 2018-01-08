@@ -1,6 +1,6 @@
 package util;
 
-import dto.PostDTO;
+import dto.QuestionDTO;
 import io.ebean.PagedList;
 import models.Post;
 
@@ -15,7 +15,7 @@ public class PostsPager {
         this.postPagedList = postPagedList;
     }
 
-    public List<PostDTO> getList() {
+    public List<QuestionDTO> getList() {
         return postPagedList.getList()
                 .stream()
                 .map(this::convertToDTO)
@@ -50,7 +50,7 @@ public class PostsPager {
         return getPageIndex() < 0 || getPageIndex() > getTotalCount();
     }
 
-    private PostDTO convertToDTO(Post post) {
-        return new PostDTO(post.id, post.title, post.body, post.createDate, post.user.username);
+    private QuestionDTO convertToDTO(Post post) {
+        return new QuestionDTO(post.id, post.title, post.body, post.createDate, post.user.username);
     }
 }

@@ -2,7 +2,7 @@ package controllers;
 
 import annotations.Authenticated;
 import dto.LoginDTO;
-import dto.PostDTO;
+import dto.QuestionDTO;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
@@ -21,14 +21,14 @@ public class QuestionController extends Controller {
 
     private final PostService postService;
     private final AnswerService answerService;
-    private final Form<PostDTO> postForm;
+    private final Form<QuestionDTO> postForm;
     private final Form<LoginDTO> loginDTOForm;
 
     @Inject
     public QuestionController(PostService postService, AnswerService answerService, FormFactory formFactory) {
         this.postService = postService;
         this.answerService = answerService;
-        this.postForm = formFactory.form(PostDTO.class);
+        this.postForm = formFactory.form(QuestionDTO.class);
         this.loginDTOForm = formFactory.form(LoginDTO.class);
     }
 
@@ -36,7 +36,7 @@ public class QuestionController extends Controller {
         return answerService.findAnswersForPost(postId)
                 .map(answerDTOs ->
                         postService.getPost(postId)
-                                .map(postDTO -> ok(post.render(postDTO, answerDTOs)))
+                                .map(questionDTO -> ok(post.render(questionDTO, answerDTOs)))
                                 .orElseGet(Results::notFound))
                 .orElseGet(Results::notFound);
     }
@@ -49,40 +49,40 @@ public class QuestionController extends Controller {
     @Authenticated
 //    @PostExistsAndUserIsOwner
     public Result getEditPostForm(Long postId) {
-        Optional<PostDTO> optionalPost = postService.getPost(postId);
+        Optional<QuestionDTO> optionalPost = postService.getPost(postId);
         if (optionalPost.isPresent() && !optionalPost.get().username.equals(session("username")))
             return badRequest(views.html.login.render(loginDTOForm.withGlobalError("Please login with proper credentials to modify this post")));
         return postService.getPost(postId)
-                .map(postDTO -> ok(editPost.render(postForm.fill(postDTO), postId)))
+                .map(questionDTO -> ok(editPost.render(postForm.fill(questionDTO), postId)))
                 .orElseGet(Results::notFound);
     }
 
     @Authenticated
     public Result createPost() {
-        Form<PostDTO> postForm = this.postForm.bindFromRequest();
+        Form<QuestionDTO> postForm = this.postForm.bindFromRequest();
         if (postForm.hasErrors()) {
             return badRequest(newPost.render(postForm));
         } else {
-            PostDTO postDTO = postForm.get();
-            postDTO.username = session("username");
-            postDTO = postService.savePost(postDTO);
-            return redirect(routes.QuestionController.getPost(postDTO.id));
+            QuestionDTO questionDTO = postForm.get();
+            questionDTO.username = session("username");
+            questionDTO = postService.savePost(questionDTO);
+            return redirect(routes.QuestionController.getPost(questionDTO.id));
         }
     }
 
     @Authenticated
 //    @PostExistsAndUserIsOwner
     public Result editPost(Long postId) {
-        Optional<PostDTO> optionalPost = postService.getPost(postId);
+        Optional<QuestionDTO> optionalPost = postService.getPost(postId);
         if (optionalPost.isPresent() && !optionalPost.get().username.equals(session("username")))
             return badRequest(views.html.login.render(loginDTOForm.withGlobalError("Please login with proper credentials to modify this post")));
-        Form<PostDTO> postForm = this.postForm.bindFromRequest();
+        Form<QuestionDTO> postForm = this.postForm.bindFromRequest();
         if (postForm.hasErrors()) {
             return badRequest(editPost.render(postForm, postId));
         } else {
-            PostDTO postDTO = postForm.get();
-            postDTO.id = postId;
-            return postService.editPost(postDTO)
+            QuestionDTO questionDTO = postForm.get();
+            questionDTO.id = postId;
+            return postService.editPost(questionDTO)
                     .map(x -> redirect(routes.QuestionController.getPost(postId)))
                     .orElseGet(Results::notFound);
         }
@@ -91,7 +91,7 @@ public class QuestionController extends Controller {
     @Authenticated
 //    @PostExistsAndUserIsOwner
     public Result deletePost(Long postId) {
-        Optional<PostDTO> optionalPost = postService.getPost(postId);
+        Optional<QuestionDTO> optionalPost = postService.getPost(postId);
         if (optionalPost.isPresent() && !optionalPost.get().username.equals(session("username")))
             return badRequest(views.html.login.render(loginDTOForm.withGlobalError("Please login with proper credentials to modify this post")));
         postService.delete(postId);

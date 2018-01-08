@@ -5,7 +5,7 @@ import play.data.validation.Constraints.Required;
 
 import java.util.Date;
 
-public class PostDTO {
+public class QuestionDTO {
 
     public Long id;
 
@@ -20,10 +20,10 @@ public class PostDTO {
 
     public String username;
 
-    public PostDTO() {
+    public QuestionDTO() {
     }
 
-    public PostDTO(Long id, String title, String body, Date createDate, String username) {
+    public QuestionDTO(Long id, String title, String body, Date createDate, String username) {
         this.id = id;
         this.title = title;
         this.body = body;

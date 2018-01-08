@@ -1,30 +1,25 @@
 package services;
 
-import dto.PostDTO;
+import dto.QuestionDTO;
 import models.Post;
 import util.PostsPager;
 
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Service class for {@link models.Post} domain objects
- *
- * @author Dusan
- */
 public interface PostService {
 
     PostsPager findNLatestPosts(int n, int page);
 
     Optional<PostsPager> findNLatestPostsForUsername(int n, int page, String username);
 
-    Optional<PostDTO> getPost(Long postId);
+    Optional<QuestionDTO> getPost(Long postId);
 
     Optional<Post> getPostEntity(Long postId);
 
-    PostDTO savePost(PostDTO postDTO);
+    QuestionDTO savePost(QuestionDTO questionDTO);
 
-    Optional<PostDTO> editPost(PostDTO postDTO);
+    Optional<QuestionDTO> editPost(QuestionDTO questionDTO);
 
     void delete(Long postId);
 }

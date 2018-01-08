@@ -1,15 +1,15 @@
 @*
 * This template takes a single argument, a list of Posts to display.
 *@
-@import dto.PostDTO
+@import dto.QuestionDTO
 
-@(postForm: Form[PostDTO])
+@(questionForm: Form[QuestionDTO])
 
 <div class="form-group">
     <div class="col-sm-9">
 
             <!-- Errors - title -->
-        @for(error <- postForm("title").errors) {
+        @for(error <- questionForm("title").errors) {
             <p class="alert alert-danger">@error.format(messages())</p>
         }
 
@@ -18,7 +18,7 @@
         placeholder="Title"
         class="form-control"
         name="title"
-        value="@postForm("title").getValue.orElse("")">
+        value="@questionForm("title").getValue.orElse("")">
 
         </div>
 </div>
@@ -27,14 +27,14 @@
     <div class="col-sm-9">
 
             <!-- Errors - body -->
-        @for(error <- postForm("body").errors) {
+        @for(error <- questionForm("body").errors) {
             <p class="alert alert-danger">@error.format(messages())</p>
         }
 
             <!-- Form fields - body -->
         <textarea placeholder="Body"
         class="form-control"
-        name="body">@postForm("body").getValue.orElse("")</textarea>
+        name="body">@questionForm("body").getValue.orElse("")</textarea>
 
     </div>
 </div>

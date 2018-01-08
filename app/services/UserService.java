@@ -6,9 +6,7 @@ import models.User;
 
 import java.util.Optional;
 
-/**
- * Created by Dusan
- */
+
 public interface UserService {
 
     Optional<UserDTO> findUserByUsername(String username);

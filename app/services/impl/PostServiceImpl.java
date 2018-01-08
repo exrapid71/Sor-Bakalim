@@ -1,6 +1,6 @@
 package services.impl;
 
-import dto.PostDTO;
+import dto.QuestionDTO;
 import models.Post;
 import models.User;
 import services.PostService;
@@ -37,7 +37,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Optional<PostDTO> getPost(Long postId) {
+    public Optional<QuestionDTO> getPost(Long postId) {
         return getPostEntity(postId)
                 .map(this::convertToDTO);
     }
@@ -48,18 +48,18 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostDTO savePost(PostDTO postDTO) {
-        Post post = convertToEntity(postDTO);
+    public QuestionDTO savePost(QuestionDTO questionDTO) {
+        Post post = convertToEntity(questionDTO);
         post.save();
         return convertToDTO(post);
     }
 
     @Override
-    public Optional<PostDTO> editPost(PostDTO postDTO) {
-        return getPostEntity(postDTO.id)
+    public Optional<QuestionDTO> editPost(QuestionDTO questionDTO) {
+        return getPostEntity(questionDTO.id)
                 .map(post -> {
-                    post.body = postDTO.body;
-                    post.title = postDTO.title;
+                    post.body = questionDTO.body;
+                    post.title = questionDTO.title;
                     post.save();
                     return convertToDTO(post);
                 });
@@ -70,13 +70,13 @@ public class PostServiceImpl implements PostService {
         Post.find.deleteById(postId);
     }
 
-    private PostDTO convertToDTO(Post post) {
-        return new PostDTO(post.id, post.title, post.body, post.createDate, post.user.username);
+    private QuestionDTO convertToDTO(Post post) {
+        return new QuestionDTO(post.id, post.title, post.body, post.createDate, post.user.username);
     }
 
-    private Post convertToEntity(PostDTO postDTO) {
-        User user = userService.findUserEntityByUsername(postDTO.username).orElse(null);
-        return new Post(postDTO.title, postDTO.body, user);
+    private Post convertToEntity(QuestionDTO questionDTO) {
+        User user = userService.findUserEntityByUsername(questionDTO.username).orElse(null);
+        return new Post(questionDTO.title, questionDTO.body, user);
     }
 
 }
