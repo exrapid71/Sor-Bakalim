@@ -10,17 +10,17 @@
     <div class="jumbotron">
         <h1>@userDTO.firstName @userDTO.lastName - Questions</h1>
     </div>
-        <!-- Show List of Posts -->
+
     @questions(questionsPager)
 
-        <!-- Pagination -->
+
     <div class="pagination">
     @if(questionsPager.indexOutOfBounds) {
-        Page is out of bounds. Go back to <a href="@routes.UserPostController.usersBlog(userDTO.username, 1)">User's Home</a>.
+        Page is out of bounds. Go back to <a href="@routes.UserPostController.usersHome(userDTO.username, 1)">User's Home</a>.
     } else {
         @if(questionsPager.hasPrev) {
-            <a href="@routes.UserPostController.usersBlog(userDTO.username, 1)">&laquo; first</a>
-            <a href="@routes.UserPostController.usersBlog(userDTO.username, questionsPager.getPageIndex - 1)">previous</a>
+            <a href="@routes.UserPostController.usersHome(userDTO.username, 1)">&laquo; first</a>
+            <a href="@routes.UserPostController.usersHome(userDTO.username, questionsPager.getPageIndex - 1)">previous</a>
         }
 
         @if(questionsPager.getTotalPageCount != 1) {
@@ -28,8 +28,8 @@
         }
 
         @if(questionsPager.hasNext) {
-            <a href="@routes.UserPostController.usersBlog(userDTO.username, questionsPager.getPageIndex + 1)">next</a>
-            <a href="@routes.UserPostController.usersBlog(userDTO.username, questionsPager.getTotalPageCount)">last &raquo;</a>
+            <a href="@routes.UserPostController.usersHome(userDTO.username, questionsPager.getPageIndex + 1)">next</a>
+            <a href="@routes.UserPostController.usersHome(userDTO.username, questionsPager.getTotalPageCount)">last &raquo;</a>
         }
     }
     </div>

@@ -3,15 +3,15 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET         /                               controllers.UserPostController.blog(page: Int ?= 1)
+GET         /                               controllers.UserPostController.home(page: Int ?= 1)
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file                   controllers.Assets.at(path="/public", file)
 
 # Home page of the application, showing blog questions from all users in reversed order of the date of publication
-GET         /userhome                       controllers.UserPostController.blog(page: Int ?= 1)
+GET         /userhome                       controllers.UserPostController.home(page: Int ?= 1)
 # Blog page of user :username, showing blog questions from this users in reversed order of the date of publication
-GET         /userhome/:username             controllers.UserPostController.usersBlog(username, page: Int ?= 1)
+GET         /userhome/:username             controllers.UserPostController.usersHome(username, page: Int ?= 1)
 
 # Present "login" page
 GET         /login                          controllers.UserController.getLoginForm

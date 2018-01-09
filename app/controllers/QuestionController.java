@@ -47,7 +47,7 @@ public class QuestionController extends Controller {
     }
 
     @Authenticated
-//    @PostExistsAndUserIsOwner
+
     public Result getEditQuestionForm(Long postId) {
         Optional<QuestionDTO> optionalQuestion = questionService.getQuestion(postId);
         if (optionalQuestion.isPresent() && !optionalQuestion.get().username.equals(session("username")))
@@ -71,7 +71,7 @@ public class QuestionController extends Controller {
     }
 
     @Authenticated
-//    @QuestionExistsAndUserIsOwner
+
     public Result editQuestion(Long postId) {
         Optional<QuestionDTO> optionalQuestion = questionService.getQuestion(postId);
         if (optionalQuestion.isPresent() && !optionalQuestion.get().username.equals(session("username")))
@@ -89,13 +89,13 @@ public class QuestionController extends Controller {
     }
 
     @Authenticated
-//    @QuestionExistsAndUserIsOwner
+
     public Result deleteQuestion(Long postId) {
         Optional<QuestionDTO> optionalQuestion = questionService.getQuestion(postId);
         if (optionalQuestion.isPresent() && !optionalQuestion.get().username.equals(session("username")))
             return badRequest(views.html.login.render(loginDTOForm.withGlobalError("Please login with proper credentials to modify this question")));
         questionService.delete(postId);
-        return redirect(routes.UserPostController.usersBlog(session("username"), 1));
+        return redirect(routes.UserPostController.usersHome(session("username"), 1));
     }
 
 }

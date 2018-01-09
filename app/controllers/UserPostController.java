@@ -5,8 +5,8 @@ import play.mvc.Result;
 import play.mvc.Results;
 import services.QuestionService;
 import services.UserService;
-import views.html.blog;
-import views.html.usersBlog;
+import views.html.home;
+import views.html.usersHome;
 
 import javax.inject.Inject;
 
@@ -22,15 +22,15 @@ public class UserPostController extends Controller {
         this.userService = userService;
     }
 
-    public Result blog(int page) {
-        return ok(blog.render(questionService.findNLatestQuestions(N_OF_LATEST_POSTS, page)));
+    public Result home(int page) {
+        return ok(home.render(questionService.findNLatestQuestions(N_OF_LATEST_POSTS, page)));
     }
 
-    public Result usersBlog(String username, int page) {
+    public Result usersHome(String username, int page) {
         return userService.findUserByUsername(username)
                 .map(userDTO ->
                         questionService.findNLatestQuestionsForUsername(N_OF_LATEST_POSTS, page, username)
-                                .map(questionDTOs -> ok(usersBlog.render(userDTO, questionDTOs)))
+                                .map(questionDTOs -> ok(usersHome.render(userDTO, questionDTOs)))
                                 .orElseGet(Results::notFound))
                 .orElseGet(Results::notFound);
     }

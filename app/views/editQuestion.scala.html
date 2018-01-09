@@ -1,6 +1,3 @@
-@*
-* This template takes a single argument, a list of Questions to display.
-*@
 @import dto.QuestionDTO
 @import helper.CSRF
 
@@ -13,7 +10,7 @@
                 
                 @helper.form(action = CSRF(routes.QuestionController.editQuestion(postId)), 'class -> "form-horizontal") {
                     @question_form(questionForm)
-                    <!-- Form field - createDate -->
+
                 <input type="hidden" name="postId" value="@questionForm("createDate").getValue.get()">
                 }
 

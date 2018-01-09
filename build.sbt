@@ -10,23 +10,20 @@ libraryDependencies += filters
 libraryDependencies += guice
 libraryDependencies += jdbc
 
-// Test Database
-libraryDependencies += "com.h2database" % "h2" % "1.4.194"
 
-// BCrypt
+libraryDependencies += "com.h2database" % "h2" % "1.4.194"
+libraryDependencies += "mysql" % "mysql-connector-java" % "5.1.41"
+
 libraryDependencies += "org.mindrot" % "jbcrypt" % "0.3m"
 
-// WebJars
+
 libraryDependencies += "org.webjars.bower" % "jquery" % "3.2.1"
 libraryDependencies += "org.webjars" % "bootstrap" % "3.3.4"
 
-// Testing libraries for dealing with CompletionStage...
+
 libraryDependencies += "org.assertj" % "assertj-core" % "3.6.2" % Test
 libraryDependencies += "org.awaitility" % "awaitility" % "2.0.0" % Test
 libraryDependencies += "org.mockito" % "mockito-core" % "2.1.0" % Test
 
-libraryDependencies += "mysql" % "mysql-connector-java" % "5.1.41"
-// Make verbose tests
-testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))
 
-javaOptions in Test += "-Dconfig.file=conf/application.test.conf"
+testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))

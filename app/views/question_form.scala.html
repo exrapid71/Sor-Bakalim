@@ -1,6 +1,3 @@
-@*
-* This template takes a single argument, a list of Posts to display.
-*@
 @import dto.QuestionDTO
 
 @(questionForm: Form[QuestionDTO])
@@ -8,12 +5,11 @@
 <div class="form-group">
     <div class="col-sm-9">
 
-            <!-- Errors - title -->
+
         @for(error <- questionForm("title").errors) {
             <p class="alert alert-danger">@error.format(messages())</p>
         }
 
-            <!-- Form field - title -->
         <input type="text"
         placeholder="Title"
         class="form-control"
@@ -26,12 +22,11 @@
 <div class="form-group">
     <div class="col-sm-9">
 
-            <!-- Errors - body -->
+
         @for(error <- questionForm("body").errors) {
             <p class="alert alert-danger">@error.format(messages())</p>
         }
 
-            <!-- Form fields - body -->
         <textarea placeholder="Body"
         class="form-control"
         name="body">@questionForm("body").getValue.orElse("")</textarea>
@@ -42,7 +37,6 @@
 <div class="form-group">
     <div class="col-sm-9">
 
-            <!-- Submit button -->
         <button type="submit" class="btn btn-primary btn-block">Save</button>
 
     </div>

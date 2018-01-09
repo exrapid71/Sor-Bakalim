@@ -1,17 +1,14 @@
-@*
-* This template takes a single argument, a list of Posts to display.
-*@
 @import util.QuestionsPager
 
 @(questionsPager: QuestionsPager)
 
-<!-- Show List of Posts -->
+
 <div class="starter-template">
     @for(questionDTO <- questionsPager.getList) {
         <div class="panel">
             <div class="panel-heading">
                 <h1><a href="@routes.QuestionController.getQuestion(questionDTO.id)">@questionDTO.title</a></h1>
-                <div> Created @questionDTO.createDate by <a href="@routes.UserPostController.usersBlog(questionDTO.username)">@questionDTO.username</a>
+                <div> Created @questionDTO.createDate by <a href="@routes.UserPostController.usersHome(questionDTO.username)">@questionDTO.username</a>
                 </div>
             </div>
             <h3 class="panel-body"> @questionDTO.body</h3>

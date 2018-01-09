@@ -1,0 +1,28 @@
+
+@import util.QuestionsPager
+
+@(questionsPager: QuestionsPager)
+
+@main {
+    @questions(questionsPager)
+
+    <div class="pagination">
+    @if(questionsPager.indexOutOfBounds) {
+        Page is out of bounds. Go back to <a href="@routes.UserPostController.home(1)">Home</a>.
+    } else {
+        @if(questionsPager.hasPrev) {
+            <a href="@routes.UserPostController.home(1)">&laquo; first</a>
+            <a href="@routes.UserPostController.home(questionsPager.getPageIndex - 1)">previous</a>
+        }
+
+        @if(questionsPager.getTotalPageCount != 1) {
+            Page @questionsPager.getPageIndex of @questionsPager.getTotalPageCount.
+        }
+
+        @if(questionsPager.hasNext) {
+            <a href="@routes.UserPostController.home(questionsPager.getPageIndex + 1)">next</a>
+            <a href="@routes.UserPostController.home(questionsPager.getTotalPageCount)">last &raquo;</a>
+        }
+    }
+    </div>
+}

@@ -31,8 +31,6 @@ public class User extends Model {
     @NotNull
     public int active;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    public List<Role> roles;
 
     @OneToMany(mappedBy = "user")
     public List<Question> questions;
