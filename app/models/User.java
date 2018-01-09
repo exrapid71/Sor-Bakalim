@@ -35,7 +35,7 @@ public class User extends Model {
     public List<Role> roles;
 
     @OneToMany(mappedBy = "user")
-    public List<Post> posts;
+    public List<Question> questions;
 
     public static final Finder<Long, User> find = new Finder<>(User.class);
 

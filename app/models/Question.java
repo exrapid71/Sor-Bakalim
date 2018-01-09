@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Post extends Model {
+public class Question extends Model {
 
     @Id
     public Long id;
@@ -33,12 +33,12 @@ public class Post extends Model {
     @ManyToOne
     public User user;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     public List<Answer> answers;
 
-    public static final Finder<Long, Post> find = new Finder<>(Post.class);
+    public static final Finder<Long, Question> find = new Finder<>(Question.class);
 
-    public Post(String title, String body, User user) {
+    public Question(String title, String body, User user) {
         this.title = title;
         this.body = body;
         this.user = user;

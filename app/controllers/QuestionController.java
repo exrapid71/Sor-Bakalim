@@ -9,92 +9,92 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Results;
 import services.AnswerService;
-import services.PostService;
-import views.html.editPost;
-import views.html.newPost;
-import views.html.post;
+import services.QuestionService;
+import views.html.editQuestion;
+import views.html.newQuestion;
+import views.html.question;
 
 import javax.inject.Inject;
 import java.util.Optional;
 
 public class QuestionController extends Controller {
 
-    private final PostService postService;
+    private final QuestionService questionService;
     private final AnswerService answerService;
-    private final Form<QuestionDTO> postForm;
+    private final Form<QuestionDTO> questionForm;
     private final Form<LoginDTO> loginDTOForm;
 
     @Inject
-    public QuestionController(PostService postService, AnswerService answerService, FormFactory formFactory) {
-        this.postService = postService;
+    public QuestionController(QuestionService questionService, AnswerService answerService, FormFactory formFactory) {
+        this.questionService = questionService;
         this.answerService = answerService;
-        this.postForm = formFactory.form(QuestionDTO.class);
+        this.questionForm = formFactory.form(QuestionDTO.class);
         this.loginDTOForm = formFactory.form(LoginDTO.class);
     }
 
-    public Result getPost(Long postId) {
-        return answerService.findAnswersForPost(postId)
+    public Result getQuestion(Long postId) {
+        return answerService.findAnswersForQuestion(postId)
                 .map(answerDTOs ->
-                        postService.getPost(postId)
-                                .map(questionDTO -> ok(post.render(questionDTO, answerDTOs)))
+                        questionService.getQuestion(postId)
+                                .map(questionDTO -> ok(question.render(questionDTO, answerDTOs)))
                                 .orElseGet(Results::notFound))
                 .orElseGet(Results::notFound);
     }
 
     @Authenticated
-    public Result getNewPostForm() {
-        return ok(newPost.render(postForm));
+    public Result getNewQuestionForm() {
+        return ok(newQuestion.render(questionForm));
     }
 
     @Authenticated
 //    @PostExistsAndUserIsOwner
-    public Result getEditPostForm(Long postId) {
-        Optional<QuestionDTO> optionalPost = postService.getPost(postId);
-        if (optionalPost.isPresent() && !optionalPost.get().username.equals(session("username")))
-            return badRequest(views.html.login.render(loginDTOForm.withGlobalError("Please login with proper credentials to modify this post")));
-        return postService.getPost(postId)
-                .map(questionDTO -> ok(editPost.render(postForm.fill(questionDTO), postId)))
+    public Result getEditQuestionForm(Long postId) {
+        Optional<QuestionDTO> optionalQuestion = questionService.getQuestion(postId);
+        if (optionalQuestion.isPresent() && !optionalQuestion.get().username.equals(session("username")))
+            return badRequest(views.html.login.render(loginDTOForm.withGlobalError("Please login with proper credentials to modify this question")));
+        return questionService.getQuestion(postId)
+                .map(questionDTO -> ok(editQuestion.render(questionForm.fill(questionDTO), postId)))
                 .orElseGet(Results::notFound);
     }
 
     @Authenticated
-    public Result createPost() {
-        Form<QuestionDTO> postForm = this.postForm.bindFromRequest();
-        if (postForm.hasErrors()) {
-            return badRequest(newPost.render(postForm));
+    public Result createQuestion() {
+        Form<QuestionDTO> questionForm = this.questionForm.bindFromRequest();
+        if (questionForm.hasErrors()) {
+            return badRequest(newQuestion.render(questionForm));
         } else {
-            QuestionDTO questionDTO = postForm.get();
+            QuestionDTO questionDTO = questionForm.get();
             questionDTO.username = session("username");
-            questionDTO = postService.savePost(questionDTO);
-            return redirect(routes.QuestionController.getPost(questionDTO.id));
+            questionDTO = questionService.saveQuestion(questionDTO);
+            return redirect(routes.QuestionController.getQuestion(questionDTO.id));
         }
     }
 
     @Authenticated
-//    @PostExistsAndUserIsOwner
-    public Result editPost(Long postId) {
-        Optional<QuestionDTO> optionalPost = postService.getPost(postId);
-        if (optionalPost.isPresent() && !optionalPost.get().username.equals(session("username")))
-            return badRequest(views.html.login.render(loginDTOForm.withGlobalError("Please login with proper credentials to modify this post")));
-        Form<QuestionDTO> postForm = this.postForm.bindFromRequest();
-        if (postForm.hasErrors()) {
-            return badRequest(editPost.render(postForm, postId));
+//    @QuestionExistsAndUserIsOwner
+    public Result editQuestion(Long postId) {
+        Optional<QuestionDTO> optionalQuestion = questionService.getQuestion(postId);
+        if (optionalQuestion.isPresent() && !optionalQuestion.get().username.equals(session("username")))
+            return badRequest(views.html.login.render(loginDTOForm.withGlobalError("Please login with proper credentials to modify this question")));
+        Form<QuestionDTO> questionForm = this.questionForm.bindFromRequest();
+        if (questionForm.hasErrors()) {
+            return badRequest(editQuestion.render(questionForm, postId));
         } else {
-            QuestionDTO questionDTO = postForm.get();
+            QuestionDTO questionDTO = questionForm.get();
             questionDTO.id = postId;
-            return postService.editPost(questionDTO)
-                    .map(x -> redirect(routes.QuestionController.getPost(postId)))
+            return questionService.editQuestion(questionDTO)
+                    .map(x -> redirect(routes.QuestionController.getQuestion(postId)))
                     .orElseGet(Results::notFound);
         }
     }
 
     @Authenticated
-//    @PostExistsAndUserIsOwner
-    public Result deletePost(Long postId) {
-        Optional<QuestionDTO> optionalPost = postService.getPost(postId);
-        if (optionalPost.isPresent() && !optionalPost.get().username.equals(session("username")))
-            return badRequest(views.html.login.render(loginDTOForm.withGlobalError("Please login with proper credentials to modify this post")));
-        postService.delete(postId);
+//    @QuestionExistsAndUserIsOwner
+    public Result deleteQuestion(Long postId) {
+        Optional<QuestionDTO> optionalQuestion = questionService.getQuestion(postId);
+        if (optionalQuestion.isPresent() && !optionalQuestion.get().username.equals(session("username")))
+            return badRequest(views.html.login.render(loginDTOForm.withGlobalError("Please login with proper credentials to modify this question")));
+        questionService.delete(postId);
         return redirect(routes.UserPostController.usersBlog(session("username"), 1));
     }
 

@@ -11,6 +11,6 @@ public interface AnswerService {
 
     AnswerDTO saveAnswer (AnswerDTO answerDTO);
 
-    Optional<List<AnswerDTO>> findAnswersForPost(Long postId);
+    Optional<List<AnswerDTO>> findAnswersForQuestion(Long postId);
 
 }

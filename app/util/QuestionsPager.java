@@ -2,32 +2,32 @@ package util;
 
 import dto.QuestionDTO;
 import io.ebean.PagedList;
-import models.Post;
+import models.Question;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PostsPager {
+public class QuestionsPager {
 
-    private final PagedList<Post> postPagedList;
+    private final PagedList<Question> questionPagedList;
 
-    public PostsPager(PagedList<Post> postPagedList) {
-        this.postPagedList = postPagedList;
+    public QuestionsPager(PagedList<Question> questionPagedList) {
+        this.questionPagedList = questionPagedList;
     }
 
     public List<QuestionDTO> getList() {
-        return postPagedList.getList()
+        return questionPagedList.getList()
                 .stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
 
     public int getPageIndex() {
-        return postPagedList.getPageIndex() + 1;
+        return questionPagedList.getPageIndex() + 1;
     }
 
     public int getPageSize() {
-        return postPagedList.getPageSize();
+        return questionPagedList.getPageSize();
     }
 
     public boolean hasNext() {
@@ -39,18 +39,18 @@ public class PostsPager {
     }
 
     public int getTotalPageCount() {
-        return postPagedList.getTotalPageCount();
+        return questionPagedList.getTotalPageCount();
     }
 
     public int getTotalCount() {
-        return postPagedList.getTotalCount();
+        return questionPagedList.getTotalCount();
     }
 
     public boolean indexOutOfBounds() {
         return getPageIndex() < 0 || getPageIndex() > getTotalCount();
     }
 
-    private QuestionDTO convertToDTO(Post post) {
-        return new QuestionDTO(post.id, post.title, post.body, post.createDate, post.user.username);
+    private QuestionDTO convertToDTO(Question question) {
+        return new QuestionDTO(question.id, question.title, question.body, question.createDate, question.user.username);
     }
 }

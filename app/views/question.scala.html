@@ -1,5 +1,5 @@
 @*
-* This template takes a single argument, a list of Posts to display.
+* This template takes a single argument, a list of Question to display.
 *@
 @import java.util.List
 @import dto.{AnswerDTO, QuestionDTO}
@@ -24,12 +24,12 @@
             <div class="row">
 
                     <!-- Delete button -->
-                <a href="@routes.QuestionController.deletePost(questionDTO.id)" class="col-md-2 pull-right">
+                <a href="@routes.QuestionController.deleteQuestion(questionDTO.id)" class="col-md-2 pull-right">
                     <button type="button" class="btn btn-primary btn-block">Delete</button>
                 </a>
 
                     <!-- Update button -->
-                <a href="@routes.QuestionController.editPost(questionDTO.id)" class="col-md-2 pull-right">
+                <a href="@routes.QuestionController.editQuestion(questionDTO.id)" class="col-md-2 pull-right">
                     <button type="button" class="btn btn-primary btn-block">Update</button>
                 </a>
 

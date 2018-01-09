@@ -1,31 +1,31 @@
 @*
 * This template takes a single argument, a list of Posts to display.
 *@
-@import util.PostsPager
+@import util.QuestionsPager
 
-@(postsPager: PostsPager)
+@(questionsPager: QuestionsPager)
 
 @main {
-    <!-- Show List of Posts -->
-    @posts(postsPager)
+    <!-- Show List of Questions -->
+    @questions(questionsPager)
 
-    <!-- Pagination -->
+
     <div class="pagination">
-    @if(postsPager.indexOutOfBounds) {
+    @if(questionsPager.indexOutOfBounds) {
         Page is out of bounds. Go back to <a href="@routes.UserPostController.blog(1)">Home</a>.
     } else {
-        @if(postsPager.hasPrev) {
+        @if(questionsPager.hasPrev) {
             <a href="@routes.UserPostController.blog(1)">&laquo; first</a>
-            <a href="@routes.UserPostController.blog(postsPager.getPageIndex - 1)">previous</a>
+            <a href="@routes.UserPostController.blog(questionsPager.getPageIndex - 1)">previous</a>
         }
 
-        @if(postsPager.getTotalPageCount != 1) {
-            Page @postsPager.getPageIndex of @postsPager.getTotalPageCount.
+        @if(questionsPager.getTotalPageCount != 1) {
+            Page @questionsPager.getPageIndex of @questionsPager.getTotalPageCount.
         }
 
-        @if(postsPager.hasNext) {
-            <a href="@routes.UserPostController.blog(postsPager.getPageIndex + 1)">next</a>
-            <a href="@routes.UserPostController.blog(postsPager.getTotalPageCount)">last &raquo;</a>
+        @if(questionsPager.hasNext) {
+            <a href="@routes.UserPostController.blog(questionsPager.getPageIndex + 1)">next</a>
+            <a href="@routes.UserPostController.blog(questionsPager.getTotalPageCount)">last &raquo;</a>
         }
     }
     </div>

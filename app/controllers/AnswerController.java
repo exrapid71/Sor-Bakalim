@@ -40,7 +40,7 @@ public class AnswerController extends Controller {
             answerDTO.username = session("username");
             answerDTO.postId = postId;
             answerService.saveAnswer(answerDTO);
-            return redirect(routes.QuestionController.getPost(postId));
+            return redirect(routes.QuestionController.getQuestion(postId));
         }
     }
 }

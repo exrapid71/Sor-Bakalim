@@ -1,5 +1,5 @@
 @*
-* This template takes a single argument, a list of Posts to display.
+* This template takes a single argument, a list of Question to display.
 *@
 @import dto.QuestionDTO
 @import helper.CSRF
@@ -12,8 +12,8 @@
             <div class="col-md-6 col-md-offset-3">
 
 
-                @helper.form(action = CSRF(routes.QuestionController.createPost()), 'class -> "form-horizontal") {
-                    @post_form(questionForm)
+                @helper.form(action = CSRF(routes.QuestionController.createQuestion()), 'class -> "form-horizontal") {
+                    @question_form(questionForm)
                 }
 
             </div>

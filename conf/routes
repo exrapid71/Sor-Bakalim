@@ -8,9 +8,9 @@ GET         /                               controllers.UserPostController.blog(
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file                   controllers.Assets.at(path="/public", file)
 
-# Home page of the application, showing blog posts from all users in reversed order of the date of publication
+# Home page of the application, showing blog questions from all users in reversed order of the date of publication
 GET         /userhome                       controllers.UserPostController.blog(page: Int ?= 1)
-# Blog page of user :username, showing blog posts from this users in reversed order of the date of publication
+# Blog page of user :username, showing blog questions from this users in reversed order of the date of publication
 GET         /userhome/:username             controllers.UserPostController.usersBlog(username, page: Int ?= 1)
 
 # Present "login" page
@@ -25,17 +25,17 @@ GET         /register                       controllers.UserController.getRegist
 POST        /register                       controllers.UserController.register
 
 # Present "create a question" page
-GET         /question/new                   controllers.QuestionController.getNewPostForm
+GET         /question/new                   controllers.QuestionController.getNewQuestionForm
 # Add question page for id of :id
-GET         /question/:id                   controllers.QuestionController.getPost(id: Long)
+GET         /question/:id                   controllers.QuestionController.getQuestion(id: Long)
 # Present "edit a question" page
-GET         /question/:id/edit              controllers.QuestionController.getEditPostForm(id: Long)
+GET         /question/:id/edit              controllers.QuestionController.getEditQuestionForm(id: Long)
 # Create new question
-POST        /question                       controllers.QuestionController.createPost
+POST        /question                       controllers.QuestionController.createQuestion
 # Update question with id of :id
-POST        /question/:id/edit              controllers.QuestionController.editPost(id: Long)
+POST        /question/:id/edit              controllers.QuestionController.editQuestion(id: Long)
 # Deletes question with id of :id
-GET         /question/:id/delete            controllers.QuestionController.deletePost(id: Long)
+GET         /question/:id/delete            controllers.QuestionController.deleteQuestion(id: Long)
 
 # Present "leave a answer" page
 GET         /question/:postId/answer        controllers.AnswerController.getAnswerForm(postId: Long)

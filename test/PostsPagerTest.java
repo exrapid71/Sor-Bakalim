@@ -31,7 +31,7 @@ public class PostsPagerTest extends WithApplication {
         UserDTO userDTO = new UserDTO(USERNAME, PASSWORD, EMAIL, "firstName", "lastName");
         userService.saveUser(userDTO);
 
-        // Populate DB with some dummy posts
+        // Populate DB with some dummy questions
 
         IntStream.rangeClosed(1, NUMBER_OF_DUMMY_POSTS)
                 .forEach(i -> postService.savePost(new PostDTO(null, "Title" + i, "body", null, USERNAME)));

@@ -25,7 +25,7 @@ public class Answer extends Model {
 
     @NotNull
     @ManyToOne
-    public Post post;
+    public Question question;
 
     @NotNull
     @ManyToOne
@@ -33,9 +33,9 @@ public class Answer extends Model {
 
     public static final Finder<Long, Answer> find = new Finder<>(Answer.class);
 
-    public Answer(String body, Post post, User user) {
+    public Answer(String body, Question question, User user) {
         this.body = body;
-        this.post = post;
+        this.question = question;
         this.user = user;
     }
 }

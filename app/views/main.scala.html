@@ -17,10 +17,13 @@
     </head>
     <body>
 
+
             <!-- navbar -->
         <nav class="navbar navbar-inverse">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="navbar-header">
+                    <a class="navbar-brand"  href="http://disputebills.com"><img src="@routes.Assets.at("images/logo.png")"  >
+                    </a>
                     <a class="navbar-brand" href="@routes.UserPostController.blog(1)">Main Page</a>
                 </div>
                 <div id="navbar" class="collapse navbar-collapse navbar-right">
@@ -36,17 +39,17 @@
                             <li class="active"><a href="@routes.UserController.login">Login</a></li>
                         </ul>
                     }
-                        <!-- show My Blog only if user is authenticated -->
+                        <!-- show My Page only if user is authenticated -->
                     @if(session.get("username") != null) {
                         <ul class="nav navbar-nav ">
                             <li class="active"><a href="@routes.UserPostController.usersBlog(session.get("username"))">
                                 My Page</a></li>
                         </ul>
                     }
-                        <!-- show new post only if user is authenticated -->
+                        <!-- show new Questions only if user is authenticated -->
                     @if(session.get("username") != null) {
                         <ul class="nav navbar-nav ">
-                            <li class="active"><a href="@routes.QuestionController.getNewPostForm()">New Question</a></li>
+                            <li class="active"><a href="@routes.QuestionController.getNewQuestionForm()">New Question</a></li>
                         </ul>
                     }
                         <!-- show sign out only if user is authenticated -->
@@ -59,10 +62,14 @@
             </div>
         </nav>
 
-        <div class="container">
-            @* And here's where we render the `Html` object containing
-            * the page content. *@
-            @content
+        <div class="container-fluid" >
+
+            <div class="row ">
+                <div class="col-md-2"><img src="@routes.Assets.at("images/adds.png")"></img></div>
+                <div class="col-md-8"> @content </div>
+                <div class="col-md-2"><img src="@routes.Assets.at("images/adds.png")"></img></div>
+            </div>
+
         </div>
 
         <hr>
@@ -81,9 +88,7 @@
                             | <a href="@routes.UserController.logout">Sign Out</a>
                         </p>
                     }
-                    <div>
-                        <p class="text-center">&copy; 2018 Sor-Bakalim</p>
-                    </div>
+
 
                 </div>
             </div>

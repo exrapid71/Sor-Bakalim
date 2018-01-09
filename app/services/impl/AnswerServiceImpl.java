@@ -2,10 +2,10 @@ package services.impl;
 
 import dto.AnswerDTO;
 import models.Answer;
-import models.Post;
+import models.Question;
 import models.User;
 import services.AnswerService;
-import services.PostService;
+import services.QuestionService;
 import services.UserService;
 
 import javax.inject.Inject;
@@ -17,12 +17,12 @@ import static java.util.stream.Collectors.toList;
 public class AnswerServiceImpl implements AnswerService {
 
     private final UserService userService;
-    private final PostService postService;
+    private final QuestionService questionService;
 
     @Inject
-    public AnswerServiceImpl(UserService userService, PostService postService) {
+    public AnswerServiceImpl(UserService userService, QuestionService questionService) {
         this.userService = userService;
-        this.postService = postService;
+        this.questionService = questionService;
     }
 
     @Override
@@ -33,21 +33,21 @@ public class AnswerServiceImpl implements AnswerService {
     }
 
     @Override
-    public Optional<List<AnswerDTO>> findAnswersForPost(Long postId) {
-        return Optional.ofNullable(Post.find.byId(postId))
-                .map(post -> post.answers
+    public Optional<List<AnswerDTO>> findAnswersForQuestion(Long postId) {
+        return Optional.ofNullable(Question.find.byId(postId))
+                .map(question -> question.answers
                         .stream()
                         .map(this::convertToDTO)
                         .collect(toList()));
     }
 
     private AnswerDTO convertToDTO(Answer answer) {
-        return new AnswerDTO(answer.body, answer.user.username, answer.post.id, answer.createDate);
+        return new AnswerDTO(answer.body, answer.user.username, answer.question.id, answer.createDate);
     }
 
     private Answer convertToEntity(AnswerDTO answerDTO) {
         User user = userService.findUserEntityByUsername(answerDTO.username).orElse(null);
-        Post post = postService.getPostEntity(answerDTO.postId).orElse(null);
-        return new Answer(answerDTO.body, post, user);
+        Question question = questionService.getQuestionEntity(answerDTO.postId).orElse(null);
+        return new Answer(answerDTO.body, question, user);
     }
 }

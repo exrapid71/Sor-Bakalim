@@ -2,34 +2,34 @@
 * This template takes a single argument, a list of Posts to display.
 *@
 @import dto.UserDTO
-@import util.PostsPager
+@import util.QuestionsPager
 
-@(userDTO: UserDTO, postsPager: PostsPager)
+@(userDTO: UserDTO, questionsPager: QuestionsPager)
 
 @main {
     <div class="jumbotron">
         <h1>@userDTO.firstName @userDTO.lastName - Questions</h1>
     </div>
         <!-- Show List of Posts -->
-    @posts(postsPager)
+    @questions(questionsPager)
 
         <!-- Pagination -->
     <div class="pagination">
-    @if(postsPager.indexOutOfBounds) {
+    @if(questionsPager.indexOutOfBounds) {
         Page is out of bounds. Go back to <a href="@routes.UserPostController.usersBlog(userDTO.username, 1)">User's Home</a>.
     } else {
-        @if(postsPager.hasPrev) {
+        @if(questionsPager.hasPrev) {
             <a href="@routes.UserPostController.usersBlog(userDTO.username, 1)">&laquo; first</a>
-            <a href="@routes.UserPostController.usersBlog(userDTO.username, postsPager.getPageIndex - 1)">previous</a>
+            <a href="@routes.UserPostController.usersBlog(userDTO.username, questionsPager.getPageIndex - 1)">previous</a>
         }
 
-        @if(postsPager.getTotalPageCount != 1) {
-            Page @postsPager.getPageIndex of @postsPager.getTotalPageCount.
+        @if(questionsPager.getTotalPageCount != 1) {
+            Page @questionsPager.getPageIndex of @questionsPager.getTotalPageCount.
         }
 
-        @if(postsPager.hasNext) {
-            <a href="@routes.UserPostController.usersBlog(userDTO.username, postsPager.getPageIndex + 1)">next</a>
-            <a href="@routes.UserPostController.usersBlog(userDTO.username, postsPager.getTotalPageCount)">last &raquo;</a>
+        @if(questionsPager.hasNext) {
+            <a href="@routes.UserPostController.usersBlog(userDTO.username, questionsPager.getPageIndex + 1)">next</a>
+            <a href="@routes.UserPostController.usersBlog(userDTO.username, questionsPager.getTotalPageCount)">last &raquo;</a>
         }
     }
     </div>

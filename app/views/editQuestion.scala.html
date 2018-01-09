@@ -1,5 +1,5 @@
 @*
-* This template takes a single argument, a list of Posts to display.
+* This template takes a single argument, a list of Questions to display.
 *@
 @import dto.QuestionDTO
 @import helper.CSRF
@@ -11,8 +11,8 @@
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 
-                @helper.form(action = CSRF(routes.QuestionController.editPost(postId)), 'class -> "form-horizontal") {
-                    @post_form(questionForm)
+                @helper.form(action = CSRF(routes.QuestionController.editQuestion(postId)), 'class -> "form-horizontal") {
+                    @question_form(questionForm)
                     <!-- Form field - createDate -->
                 <input type="hidden" name="postId" value="@questionForm("createDate").getValue.get()">
                 }
