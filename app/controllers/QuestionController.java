@@ -97,5 +97,17 @@ public class QuestionController extends Controller {
         questionService.delete(postId);
         return redirect(routes.UserPostController.usersHome(session("username"), 1));
     }
+/*
+    @Authenticated
+    public Result List<Question> searchByTitle(String title){
+        Optinal<QuestionsPager> optinalQuestion = questionService.searchTitle(title);
+        if(optinalQuestion.isPresent() && !optinalQuestion.get().username.equals(session("username")))
+            return redirect(routes.UserPostController.home(1));
+
+        return questionService.searchTitle(title)
+                .map(questionDTOs questionDTO -> ok(question.render(questionDTO, answerDTOs)))
+    }
+*/
+
 
 }

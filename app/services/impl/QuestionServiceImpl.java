@@ -79,4 +79,9 @@ public class QuestionServiceImpl implements QuestionService {
         return new Question(questionDTO.title, questionDTO.body, user);
     }
 
+    @Override
+    public Optional<Question> searchTitle(String title){
+        return Question.findTitle.query().where().eq("title", title).findOneOrEmpty();
+    }
+
 }

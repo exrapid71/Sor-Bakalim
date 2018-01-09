@@ -21,5 +21,7 @@ public interface QuestionService {
 
     Optional<QuestionDTO> editQuestion(QuestionDTO questionDTO);
 
+    Optional<Question> searchTitle(String title);
+
     void delete(Long postId);
 }

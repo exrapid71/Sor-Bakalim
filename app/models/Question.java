@@ -37,6 +37,7 @@ public class Question extends Model {
     public List<Answer> answers;
 
     public static final Finder<Long, Question> find = new Finder<>(Question.class);
+    public static final Finder<String, Question> findTitle = new Finder<>(Question.class);
 
     public Question(String title, String body, User user) {
         this.title = title;

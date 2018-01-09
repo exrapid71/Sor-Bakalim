@@ -20,7 +20,7 @@
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="@routes.UserPostController.home(1)"><img src="@routes.Assets.at("images/logo.png")" ><a class="navbar-brand" href="@routes.UserPostController.home(1)">Blog App</a></a>
+                    <a class="navbar-brand" href="@routes.UserPostController.home(1)"><img src="@routes.Assets.at("images/logo.png")" ><a class="navbar-brand" href="@routes.UserPostController.home(1)">Main Page</a></a>
                 </div>
                 <div id="navbar5" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -31,8 +31,8 @@
 
                         @if(session.get("username") != null){
                             <li class="active"><a href="@routes.UserPostController.usersHome(session.get("username"))">
-                                My Blog</a></li>
-                             <li class="active"><a href="@routes.QuestionController.getNewQuestionForm()">New Post</a></li>
+                                My Home</a></li>
+                             <li class="active"><a href="@routes.QuestionController.getNewQuestionForm()">New Question</a></li>
                              <li class="active"><a href="@routes.UserController.logout">Sign Out</a></li>
                         }
                         
